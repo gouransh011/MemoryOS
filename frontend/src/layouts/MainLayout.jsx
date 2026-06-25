@@ -23,10 +23,6 @@ const MainLayout = () => {
         <Outlet />
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-primary-900 bg-primary-950/40 py-6 text-center text-xs text-primary-500">
-        <p>© {new Date().getFullYear()} MemoryOS. All rights reserved.</p>
-      </footer>
     </div>
   );
 };
