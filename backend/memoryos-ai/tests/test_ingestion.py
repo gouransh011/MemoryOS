@@ -1,23 +1,26 @@
 from services.ingest_service import IngestService
+from chunking.engine import ChunkingEngine
 
 
 def main():
-    service = IngestService()
 
-    document = service.ingest_document(
+    ingest = IngestService()
+
+    engine = ChunkingEngine()
+
+    document = ingest.ingest_document(
         "tests/fixtures/sprinting_session.pdf"
     )
 
-    print("\n===== DOCUMENT =====")
-    print(f"ID: {document.id}")
-    print(f"Title: {document.title}")
-    print(f"File Type: {document.file_type}")
-    print(f"Content Type: {document.content_type}")
-    print(f"Metadata: {document.metadata}")
+    chunks = engine.chunk_document(document)
 
-    print("\n===== TEXT PREVIEW =====")
-    print(document.text[:500])
+    print(f"Generated {len(chunks)} chunks\n")
 
+    for chunk in chunks:
+        print("=" * 60)
+        print(chunk.chunk_index)
+        print(chunk.text[:200])
+        print()
 
 if __name__ == "__main__":
     main()

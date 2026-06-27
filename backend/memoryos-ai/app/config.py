@@ -1,0 +1,6 @@
+"""
+Application-wide configuration constants.
+"""
+
+CHUNK_SIZE = 800
+CHUNK_OVERLAP = 150
