@@ -9,21 +9,33 @@ class EmbeddingService:
     def __init__(self):
         self.embedder = BGEEmbedder()
 
+    def embed_text(
+        self,
+        text: str,
+    ) -> list[float]:
+        """
+        Generate an embedding for any text.
+        """
+        return self.embedder.embed(text)
+
     def embed_chunks(
         self,
         chunks: list[KnowledgeChunk],
     ) -> list[EmbeddedChunk]:
+        """
+        Generate embeddings for a list of KnowledgeChunks.
+        """
 
         embedded_chunks = []
 
         for chunk in chunks:
 
-            vector = self.embedder.embed(chunk.text)
+            embedding = self.embed_text(chunk.text)
 
             embedded_chunks.append(
                 EmbeddedChunk(
                     chunk=chunk,
-                    embedding=vector,
+                    embedding=embedding,
                 )
             )
 
